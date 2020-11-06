@@ -2,6 +2,8 @@ var tasks = {};
 
 var createTask = function(taskText, taskDate, taskList) {
   // create elements that make up a task item
+
+  // Creates DOM: li.list-group-item>(span.badge+p.m-1{taskText})
   var taskLi = $("<li>").addClass("list-group-item");
   var taskSpan = $("<span>")
     .addClass("badge badge-primary badge-pill")
@@ -22,6 +24,23 @@ var loadTasks = function() {
   tasks = JSON.parse(localStorage.getItem("tasks"));
 
   // if nothing in localStorage, create a new object to track all task status arrays
+  /**
+   * 
+   * @object tasks
+   * @property {object} toDo
+   *    
+   *    @property {string} toDo.date
+   *    @property {string} toDo.text
+   * 
+   * @property {object} inProgress
+   * 
+   *    @prop...
+   * 
+   * @property {object} done
+   * 
+   *    @prop...
+   * 
+   */
   if (!tasks) {
     tasks = {
       toDo: [],
@@ -31,9 +50,17 @@ var loadTasks = function() {
     };
   }
 
-  // loop over object properties
+  // TODO; Review; jQuery fundamentap you can loop over object properties
+  /**
+   * 
+   * @method
+   * @param {object} tasks        The object containing multiple key-value arrays
+   * @param {anonymousFunction} -
+   *
+   *         @param {string} key
+   *         @param {mixed} val
+   */
   $.each(tasks, function(list, arr) {
-    console.log(list, arr);
     // then loop over sub-array
     arr.forEach(function(task) {
       createTask(task.text, task.date, list);
@@ -44,8 +71,6 @@ var loadTasks = function() {
 var saveTasks = function() {
   localStorage.setItem("tasks", JSON.stringify(tasks));
 };
-
-
 
 
 // modal was triggered
