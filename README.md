@@ -1,6 +1,6 @@
 Taskmanager Pro
 ===
-Assigned to Weng Fei Fung. An app for managing tasks. Was given a codebase with legacy code and new businesses requirements. I refactored, added jQuery, and tweaked the Bootstrap layout.
+Assigned to Weng Fei Fung. An app for managing tasks. Was given a codebase with legacy code, broken code, and new business requirements that the previous developer abandoned. I took over and fixed bugs, refactored, added jQuery, and tweaked the Bootstrap layout.
 
 Demo
 ---
