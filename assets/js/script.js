@@ -72,6 +72,54 @@ var saveTasks = function() {
   localStorage.setItem("tasks", JSON.stringify(tasks));
 };
 
+// TO REVIEW: LiveQuery is not needed. Just delegate to the parent element. Any dynamically created children will automatically have the onclick
+// TO REVIEW: The JS vanilla equivalent is using event.target.matches(..) to see if a child p is clicked
+$(".list-group").on("click", "p", function() {
+  var text = $(this)
+    .text()
+    .trim();
+  var textInput = $("<textarea>")
+    .addClass("form-control")
+    .val(text);
+
+  // TO REVIEW: jQuery .replaceWith()
+  // TO REVIEW: js equivalent .replaceWith()
+  $(this).replaceWith(textInput);
+  textInput.focus();
+});
+
+$(".list-group").on("blur", "textarea", function() {
+
+  // get the textarea's current value/text
+  var text = $(this)
+  .val()
+  .trim();
+
+  // get the parent ul's id attribute
+  var status = $(this)
+  .closest(".list-group")
+  .attr("id")
+  .replace("list-", "");
+
+  // get the task's position in the list of other li elements
+  var index = $(this)
+  .closest(".list-group-item")
+  .index();
+
+  // console.log("status", status)
+  
+  tasks[status][index].text = text;
+  saveTasks();
+
+  // recreate p element
+  var taskP = $("<p>")
+  .addClass("m-1")
+  .text(text);
+
+  // replace textarea with p element
+  $(this).replaceWith(taskP);
+
+});
 
 // modal was triggered
 $("#task-form-modal").on("show.bs.modal", function() {
